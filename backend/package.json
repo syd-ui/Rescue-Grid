@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",  // OU "node index.js" OU "node app.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +17,8 @@
     "express": "^5.2.1",
     "multer": "^2.0.2",
     "pg": "^8.16.3"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
