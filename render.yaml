@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rescuegrid-backend
+    env: node
+    region: frankfurt
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: postgresql://rescuggriddb_user:OPcrFcHQZL8HcGVp43M2PUwxDwYIOQRu@dpg-d5igqrchg0os738jd990-a.frankfurt-postgres.render.com:5432/rescuggriddb
+
+# La DB est déjà créée, pas besoin de la redéclarer
