@@ -1,0 +1,12 @@
+nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 10%;
+    height: auto;
+}
+
+nav li{
+    margin-right: 30%;
+}

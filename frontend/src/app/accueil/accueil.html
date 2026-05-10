@@ -1,0 +1,32 @@
+<header>
+    <div class="logo"><img src="" alt=""></div>
+    <nav>
+        <ul>
+            <li><a href="">Accueil</a></li>
+            <li><a href="">Anciens posts </a></li>
+            <li><a href="">Envoyer un scoop</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <h1>The gossiper</h1>
+        <div *ngFor="let element of elements">
+            <img src="element.imageUrl" alt="">
+            <h2>{{element.titre}}</h2>
+            <p>{{element.texte}}</p>
+        </div>
+    </section>
+    <aside>
+        <div>
+            <img src="" alt="">
+            <p>
+                Avec l’avènement du réseau des réseaux Internet est arrivée la vulgarisation de l’informatique vers le grand public. Il devint alors possible pour tous d’accéder à Internet et à la masse d’informations qu’il contient. 
+                Ce fut aussi l’apparition du protocole de routage qui est maintenant le plus utilisé tant sur Internet qu’au sein des réseaux privés d’entreprises ou de particuliers : TCP/IP. Suite à l’ouverture d’Internet au monde, 
+                les entreprises ont été contraintes de se connecter à ce réseau pour profiter de cette vitrine mondiale. Malheureusement, si Internet a apporté une formidable révolution de l’informatique et de la circulation mondiale
+                de l’information, il a également mis à la disposition de personnes mal intentionnées de nouveaux moyens d’accéder illégalement à des données privées, qu’elles soient au sein de l’entreprise ou chez un particulier, 
+                et ceci avec un risque bien moindre puisque sans intrusion physique.
+            </p>
+        </div>
+    </aside>
+</main>

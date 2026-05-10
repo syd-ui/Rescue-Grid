@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "author": "Syd",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": -100, "left": 100, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:GND.1", "pot1:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "pot1:VCC", "red", [ "v0" ] ],
+    [ "esp:34", "pot1:SIG", "green", [ "v0" ] ],
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:TX2", "sim:RX", "green", [ "v0" ] ],
+    [ "esp:RX2", "sim:TX", "green", [ "v1" ] ],
+    [ "esp:3V3", "sim:VCC", "red", [ "h0" ] ],
+    [ "esp:GND", "sim:GND", "black", [ "h0" ] ],
+    [ "esp:GPIO32", "zmp:S", "orange", [ "v0" ] ],
+    [ "esp:3V3", "zmp:VCC", "red", [ "h0" ] ],
+    [ "esp:GND.1", "zmp:GND", "black", [ "h0" ] ],
+    [ "esp:TX", "serial:RX", "", [] ],
+    [ "esp:RX", "serial:TX", "", [] ]
+  ]
+}
