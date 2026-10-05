@@ -1,4 +1,11 @@
 [wokwi]
 version = 1
 firmware = '.pio/build/esp32doit-devkit-v1/firmware.bin'
+#firmware = 'diagram.json' 
 elf = '.pio/build/esp32doit-devkit-v1/firmware.elf'
+#serialPort = 4000
+#rfc2217ServerPort = 4000
+
+[net]
+# Cette ligne est cruciale pour le mode bridge
+#mode = 'bridge' 
