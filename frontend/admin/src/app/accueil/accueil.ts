@@ -10,6 +10,7 @@ interface Element{
 
 @Component({
   selector: 'app-accueil',
+  standalone: true,
   imports: [NgFor],
   templateUrl: './accueil.html',
   styleUrl: './accueil.css',
