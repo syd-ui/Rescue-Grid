@@ -1,0 +1,45 @@
+{
+  "name": "Rescue Grid",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "remoteUser": "node",
+  "updateRemoteUserUID": true,
+  "privileged": true,
+  "postCreateCommand": "bash -lc 'cd /workspaces/${localWorkspaceFolderBasename}/backend && npm install && cd /workspaces/${localWorkspaceFolderBasename}/frontend && npm install'",
+  "forwardPorts": [3000, 4200],
+  "portsAttributes": {
+    "3000": {
+      "label": "Backend API",
+      "onAutoForward": "notify"
+    },
+    "4200": {
+      "label": "Frontend Angular",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.eol": "\n",
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "C_Cpp.default.configurationProvider": "platformio.platformio-ide"
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "angular.ng-template",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vscode.cpptools",
+        "platformio.platformio-ide",
+        "ms-vscode.vscode-json",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}
