@@ -1,10 +1,11 @@
 <!--
 Sync Impact Report
-- Version change: 1.1.0 -> 1.1.1
-- Principes modifiés: traduction et clarification des principes et des règles
-  de gouvernance en français
+- Version change: 1.1.1 -> 1.1.2
+- Principes modifiés: V. Documentation française et conformité des spécifications;
+  renforcement de la gouvernance et clarification des exigences opérationnelles
 - Sections ajoutées: aucune
-- Sections supprimées: section redondante de langue écrite en anglais
+- Sections supprimées: aucune
+- Déplacements: consolidation des exigences linguistiques et de conformité dans le principe V
 - Follow-up TODOs: aucune
 -->
 
@@ -12,89 +13,37 @@ Sync Impact Report
 
 ## Principes fondamentaux
 
-### I. Livraison orientée mission
-Rescue-Grid DOIT prioriser les fonctionnalités qui améliorent directement la réponse aux urgences, la connaissance de la situation ou la sécurité opérationnelle. Toute modification apportée aux couches Arduino, backend ou interface d'administration DOIT correspondre à un besoin concret de secours, et les travaux sans finalité opérationnelle claire ne sont pas admissibles.
+### I. Mission de secours et pertinence opérationnelle
+Le système Rescue-Grid DOIT être conçu pour améliorer la disponibilité, la sûreté et la coordination des dispositifs de terrain et des opérateurs. Toute fonctionnalité, modification de protocole, de données ou d'interface DOIT produire un bénéfice direct pour la réponse aux urgences, le maintien de la couverture opérationnelle ou la réduction de l'incertitude. Les efforts sans impact opérationnel démontrable ne sont pas admissibles.
 
-### II. Intégrité des contrats entre systèmes
-Les firmware Arduino, les services backend et les interfaces d'administration
-DOIVENT se traiter comme des systèmes dépendants dotés de contrats explicites.
-Les schémas de données, les payloads d'appareils, les événements de statut et
-les réponses API DOIVENT être examinés ensemble avant toute modification, et
-aucun composant ne DOIT casser silencieusement les hypothèses d'un autre.
+### II. Intégrité des contrats et des données
+Les dispositifs Arduino, le backend et l'interface d'administration DOIVENT être traités comme des composants dépendants dotés de contrats explicites. Les payloads, les événements de statut, les seuils de battement de cœur, les alertes et les API DOIVENT être documentés, testés et validés ensemble ; aucun composant ne peut modifier la structure ou le sens d'un échange sans coordination préalable.
 
 ### III. Vérification avant validation
-Toute modification non triviale DOIT être validée par le test, la compilation
-ou la vérification déterministe pertinente avant la fusion. Pour la logique
-matérielle, le comportement backend et les flux d'interface, le workflow par
-defaut est le suivant : reproduire ou définir le problème, implémenter la
-correction et confirmer le comportement affecté avec une preuve.
+Tout changement non trivial DOIT être prouvé par une validation déterministe : test, compilation, simulation, revue de contrat ou vérification de comportement. Aucun changement de logique de surveillance, d'alerte, de données ou de sécurité ne peut être validé sans preuve du comportement attendu dans le contexte du système complet.
 
-### IV. Sécurité et moindre privilège
-Les données opérationnelles sensibles, l'état des dispositifs et les accès
-administratifs DOIVENT être protégés par le principe du moindre privilège. Les
-secrets NE DOIVENT PAS être stockés dans les fichiers sources ni dans la
-configuration versionnée ; les environnements locaux et de déploiement DOIVENT
-utiliser des variables d'environnement ou des sources de configuration
-protégées.
+### IV. Sécurité, confidentialité et moindre privilège
+Les données opérationnelles sensibles, les états des dispositifs et les accès administratifs DOIVENT suivre le principe du moindre privilège. Les secrets ne sont pas stockés dans le code ou la configuration versionnée. Les environnements de test et de production DOIVENT utiliser des variables d'environnement ou des secrets protégés, et tout accès administratif DOIT être justifié et traçable.
 
-### V. Simplicité et maintenabilité
-La base de code DOIT privilégier des responsabilités claires, des interfaces
-petites, des noms explicites et un couplage caché minimal. La complexité n'est
-acceptée que lorsqu'elle répond à un besoin opérationnel validé, et toute
-décision non évidente DOIT être documentée pour permettre à la prochaine
-équipe de raisonner correctement.
+### V. Documentation française et conformité des spécifications
+Toute documentation, spécification, plan, tâche, commentaire de code et artefact de communication du projet DOIT être rédigé en français. Les documents d'analyse, de conception, les workflows Speckit et les livrables techniques DOIVENT rester cohérents avec le cahier de charge et le cahier des spécifications, et toute divergence explicite DOIT être signalée avant validation. Les termes techniques imposés par l'outillage ou les bibliothèques peuvent rester en anglais uniquement lorsqu'ils sont requis par le runtime, les protocoles ou les contrats d'intégration.
 
-## Normes opérationnelles
-Le projet DOIT maintenir une séparation claire entre les responsabilités du
-matériel, du serveur et du client. La logique Arduino DOIT rester déterministe
-et légère ; les services backend DOIVENT valider, enregistrer et exposer les
-données de manière cohérente ; et les interfaces d'administration DOIVENT
-présenter un état observable sans inventer d'autorité ni contourner la
-validation backend.
+### VI. Simplicité, maintenabilité et traçabilité
+La base de code DOIT privilégier des responsabilités claires, des interfaces compactes et des changements traçables. Les décisions de conception complexes DOIVENT être documentées, la logique critique DOIT rester lisible et les évolutions du système DOIVENT maintenir la possibilité de diagnostiquer rapidement les incidents et de rétablir le service sans hypothèses.
 
-La configuration DOIT être explicite et adaptée à l'environnement. Les setups
-locaux, les profils de déploiement et les points d'accès réseau DOIVENT être
-documentés pour que l'équipe puisse reproduire, diagnostiquer et récupérer des
-pannes sans supposition.
+## Règles opérationnelles
+Le projet DOIT maintenir une séparation claire entre les responsabilités du matériel, du backend et de l'administration. L'Arduino DOIT rester déterministe et léger ; le backend DOIT valider les événements, la persistance et les alertes ; l'interface d'administration DOIT présenter un état observable sans inventer de droits ni contourner les règles du backend.
 
-## Normes de documentation et de langue
-La documentation du projet et les commentaires de code DOIVENT être rédigés en
-français, sauf si un artefact spécifique est explicitement désigné pour un autre
-public. Les identifiants, les noms de fichiers et les termes de workflow peuvent
-rester en anglais uniquement lorsque cela est requis par le runtime, les
-bibliothèques standards, les frameworks ou les contrats d'intégration ; dans la
-mesure du possible, les noms visibles pour le projet et le texte destiné aux
-utilisateurs DOIVENT rester cohérents avec la politique linguistique du projet.
+La configuration DOIT être explicite et reproductible. Les environnements locaux, de test et de production DOIVENT être documentés et alignés avec les seuils opérationnels du projet. Les états des dispositifs, les fenêtres de battement de cœur et les niveaux d'alerte DOIVENT être définis de manière explicite et testable.
 
-Les spécifications destinées aux utilisateurs, les documents de conception, les
-plans et les notes de mise en œuvre DOIVENT rester lisibles, cohérents et
-traçables par rapport au besoin opérationnel qu'ils servent. Cela permet de
-maintenir une compréhension claire pour l'équipe de secours et pour les futurs
-responsables de maintenance.
+## Processus de développement et de revue
+Tout travail DOIT être cadré par un besoin opérationnel, un défaut ou une évolution fonctionnelle documentée. Les demandes de modification DOIVENT décrire le problème, les composants affectés, les contrats touchés, les vérifications effectuées et les impacts sur le fonctionnement des dispositifs et des opérateurs. Les changements sur les protocoles de communication, la logique de détection, les alertes, l'historique ou les contraintes de sécurité exigent une revue explicite avant intégration.
 
-## Processus de développement
-Tout travail DOIT être cadré par un changement opérationnel, un problème ou un
-besoin utilisateur précis. Les demandes de fusion DOIVENT décrire le problème,
-les systèmes affectés, la vérification effectuée et tout impact sur les contrats
-ou le déploiement. Les changements sur les protocoles de communication,
-l'authentification, les contrats de données ou le comportement des dispositifs
-nécessitent une revue explicite et des conseils de migration.
-
-Les réviseurs DOIVENT confirmer que le changement respecte la constitution du
-projet, préserve l'intégrité du flux de secours de bout en bout et n'introduit
-pas de couplage non vérifié entre les composants.
+Les réviseurs DOIVENT confirmer que le changement respecte la constitution, préserve la disponibilité de secours et n'introduit pas de couplage non vérifié entre les composants. Les exceptions d'urgence DOIVENT être documentées, limitées dans le temps et suivies d'une revue de correction dans les plus brefs délais.
 
 ## Gouvernance
-Cette constitution gouverne tout le travail sur Rescue-Grid. Les amendements
-nécessitent une justification documentée, une analyse d'impact et l'approbation
-du responsable avant l'adoption de la nouvelle version. Les changements
-matériels qui altèrent les principes fondamentaux, les vérifications
-obligatoires ou les contrats système DOIVENT inclure des consignes de migration
-ou de reprise.
+Cette constitution gouverne tout le travail sur Rescue-Grid. Les amendements exigent une justification documentée, une analyse d'impact, la confirmation de conformité aux exigences du cahier de charge et du cahier des spécifications, et l'approbation du responsable avant l'adoption de la nouvelle version. Les changements qui modifient les principes fondamentaux, les seuils de surveillance, les règles de sécurité ou les contrats d'échange entre composants DOIVENT inclure un plan de migration ou de reprise.
 
-Tous les contributeurs DOIVENT vérifier leur conformité à cette constitution
-avant la fusion. Les exceptions pour des besoins opérationnels urgents DOIVENT
-être documentées, limitées dans le temps et revues immédiatement après
-l'incident afin qu'elles ne deviennent pas une déviation permanente.
+Les contributeurs DOIVENT vérifier leur conformité à cette constitution avant la fusion. Toute exception pour un besoin opérationnel urgent DOIT être documentée, limitée dans le temps, et revue immédiatement après l'incident pour empêcher qu'elle devienne une déviation permanente. Les documents et artefacts produits par les workflows de spécification DOIVENT être rédigés en français et être cohérents avec la source d'exigences validée du projet.
 
-**Version**: 1.1.1 | **Ratifié**: 2026-10-06 | **Dernière modification**: 2026-10-06
+**Version**: 1.1.2 | **Ratifié**: 2026-10-06 | **Dernière modification**: 2026-10-07
